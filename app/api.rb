@@ -1,3 +1,4 @@
+require_relative 'ledger'
 require 'sinatra/base'
 require 'json'
 
@@ -18,7 +19,7 @@ module ExpenseTracker
         JSON.generate('error' => result.error_message)
       end
     end
-    
+
     get '/expenses/:date' do
       JSON.generate([])
     end
