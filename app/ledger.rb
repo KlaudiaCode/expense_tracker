@@ -4,6 +4,10 @@ module ExpenseTracker
   class Ledger
     def record(expense)
     end
+
+    def get(date)
+      
+    end
   end
 
 end
