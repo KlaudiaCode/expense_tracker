@@ -6,7 +6,6 @@ module ExpenseTracker
     end
 
     def get(date)
-      
     end
   end
 

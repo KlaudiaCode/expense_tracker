@@ -54,7 +54,50 @@ module ExpenseTracker
           post '/expenses', JSON.generate(expense)
           expect(last_response.status).to eq(422)
         end
-      end  
+      end 
+    end
+
+    describe 'GET/expenses/:date' do
+      context 'when expenses exist on the given date' do
+
+        before do 
+          date = '12-12-22'
+
+          allow(ledger).to receive(:get)
+            .with(date)
+            .and_return(RecordResult.new(true, 417, nil))
+
+          get "expenses/#{date}"
+        end
+
+        it 'returns the expense records as JSON' do
+          parsed = JSON.parse(last_response.body)
+          expect(parsed).to include('expense_id' => 417) 
+        end 
+        it 'responds with a 200 (OK)' do
+          expect(last_response.status).to eq(200) 
+        end
+      end
+      context 'when there are no expenses on the given date' do
+
+        before do 
+          date = '12-12-22'
+
+          allow(ledger).to receive(:get)
+            .with(date)
+            .and_return(RecordResult.new(false, 417, 'Expenses not found'))
+
+          get "expenses/#{date}"
+        end
+
+        it 'returns an empty array as JSON' do 
+          parsed = JSON.parse(last_response.body)
+          expect(parsed).to eq([]) 
+        end
+        it 'responds with a 200 (OK)' do
+          expect(last_response.status).to eq(200) 
+        end
+      end
     end
   end
 end
