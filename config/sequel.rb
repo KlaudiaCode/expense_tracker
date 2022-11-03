@@ -1,2 +1,2 @@
 require 'sequel'
-DB = Sequel.sqlite("./db/#{ENV.fetch('RACK_ENV', 'development')}.db")
+DB = Sequel.connect(adapter: 'sqlite', host: 'localhost', database: ENV.fetch('RACK_ENV', 'development'))
