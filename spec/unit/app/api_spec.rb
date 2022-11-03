@@ -63,7 +63,7 @@ module ExpenseTracker
         before do 
           date = '12-12-22'
 
-          allow(ledger).to receive(:get)
+          allow(ledger).to receive(:expenses_on)
             .with(date)
             .and_return(RecordResult.new(true, 417, nil))
 
@@ -83,7 +83,7 @@ module ExpenseTracker
         before do 
           date = '12-12-22'
 
-          allow(ledger).to receive(:get)
+          allow(ledger).to receive(:expenses_on)
             .with(date)
             .and_return(RecordResult.new(false, 417, 'Expenses not found'))
 
