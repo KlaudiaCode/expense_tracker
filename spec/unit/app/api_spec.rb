@@ -65,7 +65,7 @@ module ExpenseTracker
 
           allow(ledger).to receive(:expenses_on)
             .with(date)
-            .and_return(RecordResult.new(true, 417, nil))
+            .and_return(RecordResult.new(true, 417, nil).to_h)
 
           get "expenses/#{date}"
         end
@@ -85,7 +85,7 @@ module ExpenseTracker
 
           allow(ledger).to receive(:expenses_on)
             .with(date)
-            .and_return(RecordResult.new(false, 417, 'Expenses not found'))
+            .and_return([])
 
           get "expenses/#{date}"
         end

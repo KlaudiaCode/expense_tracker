@@ -27,11 +27,8 @@ module ExpenseTracker
       date = params['date']
       result = @ledger.expenses_on(date)
       
-      if result.success?
-        JSON.generate('expense_id' => result.expense_id)
-      else
-        JSON.generate([])
-      end
+      JSON.generate(result)
+      
     end
   end
 end
